@@ -112,8 +112,8 @@ func (m Manifest) IsK8s() bool {
 	return ok
 }
 
-func (m Manifest) IsUnresourcedYAMLManifest() bool {
-	return m.Name == UnresourcedYAMLManifestName
+func (m Manifest) IsNonWorkloadYAMLManifest() bool {
+	return len(m.ImageTargets) == 0
 }
 
 func (m Manifest) DeployTarget() TargetSpec {

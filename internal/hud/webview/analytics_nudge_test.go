@@ -44,6 +44,7 @@ func TestNeedsNudgeGreenManifest(t *testing.T) {
 
 	m := model.Manifest{Name: "server"}
 	targ := store.NewManifestTarget(m)
+	targ.Manifest = targ.Manifest.WithImageTarget(model.ImageTarget{})
 	targ.State = &store.ManifestState{LastSuccessfulDeployTime: time.Now()}
 	state.UpsertManifestTarget(targ)
 

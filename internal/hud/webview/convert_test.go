@@ -137,6 +137,7 @@ func TestNeedsNudgeSet(t *testing.T) {
 
 	m := fooManifest
 	targ := store.NewManifestTarget(m)
+	targ.Manifest = targ.Manifest.WithImageTarget(model.ImageTarget{})
 	targ.State = &store.ManifestState{}
 	state.UpsertManifestTarget(targ)
 
@@ -178,7 +179,7 @@ func TestFeatureFlags(t *testing.T) {
 func TestReadinessCheckFailing(t *testing.T) {
 	m := model.Manifest{
 		Name: "foo",
-	}.WithDeployTarget(model.K8sTarget{})
+	}.WithDeployTarget(model.K8sTarget{}).WithImageTarget(model.ImageTarget{})
 	state := newState([]model.Manifest{m})
 	state.ManifestTargets[m.Name].State.RuntimeState = store.K8sRuntimeState{
 		Pods: map[k8s.PodID]*store.Pod{
